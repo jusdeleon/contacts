@@ -16,13 +16,23 @@
 
         <table class="table table-bordered table-striped">
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Mobile Number</th>
-                <th>Telephone Number</th>
-                <th>E-mail Address</th>
+                <th>
+                    <a href="#" ng-click="setOrder('first_name'); setSort()">First Name</a>
+                </th>
+                <th>
+                    <a href="#" ng-click="setOrder('last_name'); setSort()">Last Name</a>
+                </th>
+                <th>
+                    <a href="#" ng-click="setOrder('mobile_number'); setSort()">Mobile Number</a>
+                </th>
+                <th>
+                    <a href="#" ng-click="setOrder('telephone_number'); setSort()">Telephone Number</a>
+                </th>
+                <th>
+                    <a href="#" ng-click="setOrder('email'); setSort()">E-mail Address</a>
+                </th>
             </tr>
-            <tr ng-repeat="contact in contacts | filter: query">
+            <tr ng-repeat="contact in contacts | filter: query | orderBy: order: reverse">
                 <td> {{ contact.first_name }} </td>
                 <td> {{ contact.last_name }}</td>
                 <td> {{ contact.mobile_number }} </td>
@@ -42,6 +52,18 @@
                     $http.get('api/contacts').success(function(response) {
                         $scope.contacts = response;
                     });
+
+                    $scope.order = 'first_name';
+                    $scope.reverse = false;
+
+                    $scope.setOrder = function(order) {
+                        $scope.order = order;
+                    };
+
+                    $scope.setSort = function()
+                    {
+                        $scope.reverse = ! $scope.reverse;
+                    };
                 });
     </script>
 </body>
