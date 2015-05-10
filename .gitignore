@@ -1,3 +1,9 @@
 /lumen.log
 /vendor
 .env
+
+# PHPStorm
+.idea/
+
+# AngularJS
+public/lib
