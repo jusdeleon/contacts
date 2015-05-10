@@ -1,0 +1,30 @@
+<div class="form-group">
+    <input type="search" class="form-control" ng-model="query" placeholder="Search">
+</div>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            <a ng-click="setOrder('first_name'); setSort()">First Name</a>
+        </th>
+        <th>
+            <a ng-click="setOrder('last_name'); setSort()">Last Name</a>
+        </th>
+        <th>
+            <a ng-click="setOrder('mobile_number'); setSort()">Mobile Number</a>
+        </th>
+        <th>
+            <a ng-click="setOrder('telephone_number'); setSort()">Telephone Number</a>
+        </th>
+        <th>
+            <a ng-click="setOrder('email'); setSort()">E-mail Address</a>
+        </th>
+    </tr>
+    <tr ng-repeat="contact in contacts | filter: query | orderBy: order: reverse">
+        <td> {{ contact.first_name }} </td>
+        <td> {{ contact.last_name }}</td>
+        <td> {{ contact.mobile_number }} </td>
+        <td> {{ contact.telephone_number }} </td>
+        <td> {{ contact.email }} </td>
+    </tr>
+</table>
