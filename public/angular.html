@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="contactsApp">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Contacts</title>
+    <!-- Bootswatch Flatly theme -->
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container" ng-controller="ContactsController">
+        <h1>Contacts</h1>
+
+        <div class="form-group">
+            <input type="search" class="form-control" ng-model="query" placeholder="Search">
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile Number</th>
+                <th>Telephone Number</th>
+                <th>E-mail Address</th>
+            </tr>
+            <tr ng-repeat="contact in contacts | filter: query">
+                <td> {{ contact.first_name }} </td>
+                <td> {{ contact.last_name }}</td>
+                <td> {{ contact.mobile_number }} </td>
+                <td> {{ contact.telephone_number }} </td>
+                <td> {{ contact.email }} </td>
+            </tr>
+        </table>
+    </div>
+
     <script src="lib/angularjs/angular.min.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        angular.module('contactsApp', [])
+                .controller('ContactsController', function ($scope, $http) {
+                    $http.get('api/contacts').success(function(response) {
+                        $scope.contacts = response;
+                    });
+                });
+    </script>
 </body>
 </html>
